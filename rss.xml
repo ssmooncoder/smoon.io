@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 17 Jun 2021 23:13:38 GMT</lastBuildDate><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 17 Jun 2021 23:19:44 GMT</lastBuildDate><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-«package-name»&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you can’t remember the name of the package, simply search to return a list of names:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-
@@ -195,6 +195,38 @@ body &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=
 &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zlogin&lt;/code&gt;&lt;/strong&gt; - login shell, may not exist.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Prompt Colors&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/cd75d1ba46eba601e7c313684567746c/80cfc/terminal.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 67.08860759493672%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAABYlAAAWJQFJUiTwAAACJUlEQVQ4y6WTy27TQBSGJ5ayAakgWMTIc7Nn7MS3iZMmjS8kaYUoTwALnqJe0Mdhx8MAgogNZQevQRnmoHFKaKWICrH4JM8Z+5s5/mcQQqj3/HTxYv1kfj6fl2dlWbZVVbVVvWibpmmfnT5tj49P2tVq3S6X67Ysq7aum+uc1XXzqqrqlwghByGE7j6eTy+qZgZ5rkApBfEohkgoCMMhRFEIQkhI0gSmh1PIshyklCCEuEEQiG/9fv+eFR6EsvgwyZd24jvnTHMe6CSqdTKcaymGmnOqh3KsVVpqGSSaUa4xxr+5xBiD53mfHcd5sBWKfJOMJhCGoaaUGkqZKdTM5HlukjgxQvhG8rGJgoXhPDCEErN9r+MnpRQwxl92wkiozTirbXuaMQaMcSjyCgp1BGmaAiEeSD6BVJ6AFAkQgsFKLISQfcJiM84aiKLI7hAY3QrTpADf50AZBsmnEIcVMM6s5EpI9guzTG2O5mUnxN3qDEbhDIZyAozIbiy4gljW4PvB7cIoGG9sKFJK+5PBtj07LKEqVxDKFDjjELAEomDazd0qDNPhJs0LoIRpQohhjBmlcpPlqYnjkfED3xCCOyixQZAd+1uepB/9kNviJaXUSrXned2xsM9bqKaEXhvv+HEl/HNssEcuGGW75LpgurRv1v4GIeSr4zgPrfDOYDB47bruJ9d137qu+/4feWe/HQwGb3q93oEV9hBC9so8+k/u27v8Cw7gI/Wgz9FaAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Terminal Colors&quot;
+        title=&quot;Terminal Colors&quot;
+        src=&quot;/static/cd75d1ba46eba601e7c313684567746c/f058b/terminal.png&quot;
+        srcset=&quot;/static/cd75d1ba46eba601e7c313684567746c/c26ae/terminal.png 158w,
+/static/cd75d1ba46eba601e7c313684567746c/6bdcf/terminal.png 315w,
+/static/cd75d1ba46eba601e7c313684567746c/f058b/terminal.png 630w,
+/static/cd75d1ba46eba601e7c313684567746c/40601/terminal.png 945w,
+/static/cd75d1ba46eba601e7c313684567746c/78612/terminal.png 1260w,
+/static/cd75d1ba46eba601e7c313684567746c/80cfc/terminal.png 1844w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The prompt is configured using &lt;code class=&quot;language-text&quot;&gt;$PS1&lt;/code&gt;, which isn’t the gaming console but the “prompt string”. Here is a list of important escapes:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;%n&lt;/code&gt;&lt;/strong&gt; - username&lt;/li&gt;
