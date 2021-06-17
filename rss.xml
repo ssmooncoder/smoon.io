@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 02 Jun 2021 00:29:19 GMT</lastBuildDate><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 17 Jun 2021 23:13:38 GMT</lastBuildDate><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-«package-name»&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you can’t remember the name of the package, simply search to return a list of names:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-
@@ -187,10 +187,13 @@ body &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=
 
 &lt;span class=&quot;token function&quot;&gt;receiveDelete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Shell (zsh/bash) Configuration]]></title><description><![CDATA[macOS ships with Zsh as its default shell starting with Catalina (10.16). Thankfully, Zsh shares much of the fuctionality with bash, so…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/shell-config/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/shell-config/</guid><pubDate>Tue, 20 Aug 2019 20:09:11 GMT</pubDate><content:encoded>&lt;p&gt;macOS ships with Zsh as its default shell starting with Catalina (10.16). Thankfully, Zsh shares much of the fuctionality with bash, so existing configurations should transfer over without issue.&lt;/p&gt;
 &lt;h1&gt;Dotfiles&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zprofile&lt;/code&gt;&lt;/strong&gt; - sourced before &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;. I have &lt;code class=&quot;language-text&quot;&gt;PATH&lt;/code&gt; environment variables here.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;&lt;/strong&gt; - configure the interactive shell. I hold aliases, color configurations, and other environment variables here.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Shell startup files, also known as &lt;em&gt;dotfiles&lt;/em&gt;, are usually found in your home directory (if it exists). They are sourced in the following order:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zshenv&lt;/code&gt;&lt;/strong&gt; - may not exist.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zprofile&lt;/code&gt;&lt;/strong&gt; - login shell, sourced before &lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;. I have &lt;code class=&quot;language-text&quot;&gt;PATH&lt;/code&gt; environment variables here.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zshrc&lt;/code&gt;&lt;/strong&gt; - login and interactive shells. I hold aliases, color configurations, and other environment variables here.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-text&quot;&gt;.zlogin&lt;/code&gt;&lt;/strong&gt; - login shell, may not exist.&lt;/li&gt;
+&lt;/ol&gt;
 &lt;h2&gt;Prompt Colors&lt;/h2&gt;
 &lt;p&gt;The prompt is configured using &lt;code class=&quot;language-text&quot;&gt;$PS1&lt;/code&gt;, which isn’t the gaming console but the “prompt string”. Here is a list of important escapes:&lt;/p&gt;
 &lt;ul&gt;
@@ -237,4 +240,57 @@ alias nano=&amp;#39;nano -T4&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 /usr/local/bin/code
 
 $ &lt;span class=&quot;token function&quot;&gt;which&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;nano&lt;/span&gt;
-/usr/bin/nano&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
+/usr/bin/nano&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Git Demystified]]></title><description><![CDATA[Distance from  There are several ways to refer to a previous commit from .  - refers to the first parent.  - first parent’s first parent…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</guid><pubDate>Tue, 18 Jun 2019 20:09:11 GMT</pubDate><content:encoded>&lt;h1&gt;Distance from &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;There are several ways to refer to a previous commit from &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD~&lt;/code&gt; - refers to the first parent.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD~2&lt;/code&gt; - first parent’s first parent.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD~~&lt;/code&gt; - alternative form.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD^&lt;/code&gt; - same as above.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD^2&lt;/code&gt; - second parent (for merges).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD@{1}&lt;/code&gt; - same as above.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;HEAD@{2}&lt;/code&gt; - parent’s parent.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Files (Staging Area)&lt;/h1&gt;
+&lt;p&gt;Unintuitively, the &lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt; command is used for refs and files&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;git add «file»&lt;/code&gt; - stage for commit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git add -A&lt;/code&gt; - new, modified, and deleted files.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git add -u&lt;/code&gt; - modified and deleted files (new files are ignored).&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git add .&lt;/code&gt; - new and modified (deleted files are ignored).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git reset «file»&lt;/code&gt; - unstage. Think of it as the opposite to &lt;code class=&quot;language-text&quot;&gt;git add&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git reset --hard&lt;/code&gt; - equivalent to &lt;code class=&quot;language-text&quot;&gt;git reset . ; git checkout .&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;&lt;code class=&quot;language-text&quot;&gt;checkout&lt;/code&gt; vs. &lt;code class=&quot;language-text&quot;&gt;reset&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt; moves &lt;em&gt;both&lt;/em&gt; the &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt; and branch pointer. &lt;code class=&quot;language-text&quot;&gt;git checkout&lt;/code&gt; &lt;em&gt;only&lt;/em&gt; moves the &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;, detaching it.&lt;/p&gt;
+&lt;p&gt;To reattach a detached &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; checkout «branch»   &lt;span class=&quot;token comment&quot;&gt;# e.g., git checkout master&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To undo an accidental &lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt;,&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; reflog
+$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; reset «hash»&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1&gt;Alias&lt;/h1&gt;
+&lt;p&gt;The config files to set aliases are found in &lt;code class=&quot;language-text&quot;&gt;~/.gitconfig&lt;/code&gt;. You can create a section in the file as follows:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;[alias]
+ac = !git add -A &amp;amp;&amp;amp; git commit -m
+c = commit
+co = checkout
+l = log --all --decorate --oneline --graph
+s = status
+sh = stash&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;An alias expansion can be prefixed with an exclamation mark &lt;code class=&quot;language-text&quot;&gt;!&lt;/code&gt; to treat it as a shell command. &lt;/p&gt;</content:encoded></item></channel></rss>
