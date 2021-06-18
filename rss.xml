@@ -1,4 +1,163 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 17 Jun 2021 23:51:36 GMT</lastBuildDate><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Samuel Moon]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 18 Jun 2021 04:03:57 GMT</lastBuildDate><item><title><![CDATA[Next Permutation Algorithm]]></title><description><![CDATA[Python, as of v3.9.5, doesn’t have the equivalent of the C++ function . This function rearranges elements into the next lexicographically…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/next-permutation/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/next-permutation/</guid><pubDate>Sat, 12 Jun 2021 20:09:11 GMT</pubDate><content:encoded>&lt;p&gt;Python, as of v3.9.5, doesn’t have the equivalent of the C++ function &lt;code class=&quot;language-text&quot;&gt;std::next_permutation&lt;/code&gt;. This function rearranges elements into the &lt;em&gt;next&lt;/em&gt; lexicographically greater permutation.&lt;/p&gt;
+&lt;p&gt;There is a permutation function in the &lt;code class=&quot;language-text&quot;&gt;itertools&lt;/code&gt; library, but it generates &lt;em&gt;a&lt;/em&gt; permutation, not in lexicographic order. For example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; itertools &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; permutation
+&lt;span class=&quot;token comment&quot;&gt;# next permutation should be [3,1,2]&lt;/span&gt;
+arr &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+p &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; permutation&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;arr&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;# first result returns the input array (unchanged)&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (2, 3, 1)&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (2, 1, 3) NOT lexicographically greater&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (3, 2, 1) NOT lexicographically greater&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# (3, 1, 2) correct answer&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Lexicographic Ordering&lt;/h2&gt;
+&lt;p&gt;Iterating from right to left, there will be a point when the elements start decreasing (i.e. the value at index &lt;code class=&quot;language-text&quot;&gt;i-1&lt;/code&gt; is less). We’ll call this the &lt;strong&gt;pivot&lt;/strong&gt;, and the portion from pivot to the right end the &lt;strong&gt;suffix&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/31e5bffaa63cd8bdbdb40be644be855e/0b6f4/pivot.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 106.32911392405065%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAVCAYAAABG1c6oAAAACXBIWXMAABYlAAAWJQFJUiTwAAADcElEQVQ4y42Vy4scVRTGSyUOxAdEFyIzI3H6UY+uV9e7epxpmR570pp2pifpTDJmJ+JGk1kIKopoXAiDGETC4EKIoIIbFcSNq4hZqRAEF25ciO5ciPgH/OTcym27kwguPk7V5dZ3z/nOd08ZjuPw/2ATtUOSuI3rOoShj23bN+0zZFFgWdYMbrXm+jGOn1BruDitBNOqCG3bQfMYrVYL3/cJgmAGM2thiOe6bPZcTqxbDPsNTo1cAt+cIVMZhmFIkiTEcUye5+q5LEuFNE3JMkFOmUV8t38Xf344xy9f38bPVwx2Rk3Kzhrr62v0ej3a7TaGZCAfClFRFOpZoiDLMnVIlleEX712hJ/evZurn8zx7WeHON5fomn6PNpdVZVMNJTsoihSixIlazlNoN8FeezRST2yxGG59HEcC9txJporwkpU+z9hWf9G03Km0FLrzWZzAiFWGkqZAtFNyqw0LMjyktVOzJevHuHaxXv45qM5rn5+mNEwpB0V5HnKysqKQrfbVVUoQl2ykMmz6CeEUZyyWgZce/swf398J79dMfj9+9sZb/kEYUGSRGq/NES+dV23so28aDLJtIqJ6nCRJZx8zGT3WIOTx+uc3jbJM3GGELQwTVNpp3VUTRFmgZDrKKg1HZYaLRYf9lg46lFv+DRM6aaL53mKRAh1VIS6s4Iqu4gkzVjOQ95/7gE+ffl+Lu/fy+WL99HveURRqrKX/VKJrkzsJVyGWEMbW3lPSi2WGawl/HpwCL64g79+MPjjR4Od7YCwXVIUVePku06nw3A4VE2RrA0pUdj1LcmUyVNl5HPjGi+dXWLv6UX2nj1KdzUmzUoSpW+mCMQuIs+kZKlfe3F6KMgdnX/I4cFFh/kFm/kFi3qtjtms06zXsMwG1vWGTE8dQ4aA1kNpmMSkSRWfONVj86kNHj8xZjA6w8bWGfqbFTZGuwTtGJ2QJlYaah9OhkNR0nmk5Nxbz/DKwQvsvfkOexcOeP719zh/4RLn37jEi/sfkBQrmM3m7DwUHbSG2o95JgMhYzBeZ7g7oL81vp7ZaY5t7dJ/cofB9ln8MMKeylARSspSthCLuBInvnRcfM/Hc1v4nquiwG05tMNATfEbp7Yx7fJpSNf0SJND/CBQVYhN9OCVBG4ivNV/QR9S3elychP08J12xI1d/gdImrEs3wPW9gAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Pivot&quot;
+        title=&quot;Pivot&quot;
+        src=&quot;/static/31e5bffaa63cd8bdbdb40be644be855e/f058b/pivot.png&quot;
+        srcset=&quot;/static/31e5bffaa63cd8bdbdb40be644be855e/c26ae/pivot.png 158w,
+/static/31e5bffaa63cd8bdbdb40be644be855e/6bdcf/pivot.png 315w,
+/static/31e5bffaa63cd8bdbdb40be644be855e/f058b/pivot.png 630w,
+/static/31e5bffaa63cd8bdbdb40be644be855e/40601/pivot.png 945w,
+/static/31e5bffaa63cd8bdbdb40be644be855e/0b6f4/pivot.png 984w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;pivot &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;# iterate right-to-left&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;# Note: for loop stops one index before 0&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# check if next element is decreasing&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        pivot &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the suffix, iterate from right to left (again), looking for the smallest value &lt;em&gt;greater than or equal to&lt;/em&gt; the pivot. This value will be swapped with pivot.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/02cf6f1947d697051f4c2340be9c7370/966a0/swap.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 101.8987341772152%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAABYlAAAWJQFJUiTwAAADbklEQVQ4y22UXWscVRjH51YUL1S8sk33Jbs7c+blzNuZ2Um22W4ISZtqE0NNlEig1kSqYqVC0SKIFSwUigpSKVbUG8ELUVD8Al6qiF/AK8ELL/wGP3nOcpJt9eLZeXbmOf/zf/7Pi6eUIo5jkiSx5vwoitBZQpLH6FRP/2tNGMUUuWJ5qcOw6uH7PoPBAN8fEAQBngQVRUGe55Rlaf26rsmznPMH57hy6xJntlbJ05y6LvFVxcsXjvPHTx5ffvAQUZQwGi2ytHQSIeelaYoxxpoADYdDmqbBlIZnX9ni2u3XOfvMaSpT0zQVcTLi8v4x/vrZ4+vbD+L7islkQmWMZeoJTWElJmyFqVySZRlpoVkYN6SZtoxTnVBVBlP6bKz7jEd9BgOXsj9N2TnOhLa8k2ev22O+PU+/1yeKQrrzAa12SKut6PVjer3Qxh7p6ONJAYSN01Cekr5ONCsbp3j6hbNMVkWfjL2dNndvPszl/Q5hJPGZLZYUUs4dauiKIkBVVVkdy8Kw98YON756m83ddZRquPXOo/Cnx7efPU4Yn2Q4LK08a2trjMfjKUNBd8UQMPHFyqJk5dwptg82mayOyFLD3naHT28+xqsXOyS6xpjCyiQYTipPcg/D0L4Q332QVDqtLv3OgBMn+vQGKcfmFK1OwfE5nySJ/6OfLYprWFdZ8eUZRzH1qMQsVayfHrC79QSrywFaJ5gys6wkVkAcEQt42CJpaosiJikXecHua1tc+egqP3zT5e9fPD68PoeKhhiTT2OKwp6TPhSzRZFbnG6uqRcWFmxjbx88xUvXL/HFnXl+/9HjvTc7pPnINrjTXOSSeAG3jS25yy12TsPwaI61xg8CkjRDKR9TapQKbDdIanJG4uV8v9+3YDZl+ZEPYgLkfKVCdOKTpdLUAYEK/zfOaXgI6JaDmPThdDnIzBo+ufEIv37v8e77NReuXWTjuTOkOrOpOr0F1GVo28YVQ4BcHzZNTZYv8t3dB/jnN487ny9y9eO32HlxE1NUmMpY3WY1FE2thlIZt22OVlhOlhU8udZl//kuyysRo5URpikxprKM3BKRNO/RcHY5ON8th3ZH0WonKKVJtRQhItHTogmg68PZ855zZsGOQMVkktShVjKzbhG4qboH8P71df+N7ikpCTPRWKZkdtxmCf0LonmPE4iPsMwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;swap&quot;
+        title=&quot;swap&quot;
+        src=&quot;/static/02cf6f1947d697051f4c2340be9c7370/f058b/swap.png&quot;
+        srcset=&quot;/static/02cf6f1947d697051f4c2340be9c7370/c26ae/swap.png 158w,
+/static/02cf6f1947d697051f4c2340be9c7370/6bdcf/swap.png 315w,
+/static/02cf6f1947d697051f4c2340be9c7370/f058b/swap.png 630w,
+/static/02cf6f1947d697051f4c2340be9c7370/966a0/swap.png 944w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# right-to-left, but stop before pivot&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; j &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; pivot&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# swap if some number in suffix&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;# is greater than pivot&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After swapping, the final thing left to do is reversing the suffix portion. We can do this in-place using two pointers and swapping.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e36fa5503540a7f7c965a996fd6f5304/966a0/reverse.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 95.56962025316456%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAACm0lEQVQ4y41UTW/TQBDNXwFK/Lle27F3105pQ5s0BZI2qlSKVAlVFbSnCqhUJDhSDkhwgAsSNw78Bv4Bv+uht2bdNATUw2RmJ543M29mtxOGIW4iMpGtHQQB4jhGFEXWbvyN7tBxE8nzvLU9z0eaZRBJAt/3ryXu8IfZKEKIVjO7O1OMNoij5j/GqF6OTDaAFM/zbLIOA5VSKIoCZVlazTNtpTSyPMN4MMPLp+9wMDlCJCXGKsGXWYo3oxgiDKCNQV1XNpkFNMZYEK01qqqydr/fhyoVtCkxGx3i0+sfODk4R5znmOkYP48rfN3LIQIPw9EI08nEdmVbZjUE6vV6Fox80UettYIuKozXJ1jVayiUgskl9ozAgzJG2A6lGVY7FKI7gqnJG3mhXvG6uO37uLWyAhHH6NL2fetbHJ5tmZWxGvLndJqmUKpEkmYYFgKH2sO0yiCkhCkrbK/t4n41toU4sVN2QyEo2ySPBKzrGgUTqQqn9wL8OtvA5a5CICU2+9v48Oo7zo/eI44ExuMt7Ex3kCRJA8hgDsHYadXtcCoOq+5jvxb4OJU4HTKBwnq9geePL3Dw6BnCILIF8PuWQ4JKKa2DoyeHPJNDtn7X8xEIiTtdniV830MYBQhCv93Dbrd7tdgMZrkMdprAGW+D1SkS6jRDKnrI0wKpTG2cm667grZlcuc4dOK4bJZcodQFNlcf4u3JZxzvv0CvyK2fW+DWrQUkb+RgnkNy6jT9VW2wtb6Dy7NvOHlyAWMangk4GAwwHA6vHge2xgxsgdnYttOsln6uk0xSmHLVttzjXc6yP4+Fd3WX5/tf1MsWna26p2r+22uvzTKwZeAELYvSVv6vQjqLGeYlWLinbgMoi2B/Vfg/mQ9eVtk84G/mbFoE8hl/lgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;reverse&quot;
+        title=&quot;reverse&quot;
+        src=&quot;/static/e36fa5503540a7f7c965a996fd6f5304/f058b/reverse.png&quot;
+        srcset=&quot;/static/e36fa5503540a7f7c965a996fd6f5304/c26ae/reverse.png 158w,
+/static/e36fa5503540a7f7c965a996fd6f5304/6bdcf/reverse.png 315w,
+/static/e36fa5503540a7f7c965a996fd6f5304/f058b/reverse.png 630w,
+/static/e36fa5503540a7f7c965a996fd6f5304/966a0/reverse.png 944w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;l &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; pivot&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;     &lt;span class=&quot;token comment&quot;&gt;# suffix start&lt;/span&gt;
+r &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;# suffix end (always rightmost)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; l &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; r&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;l&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;l&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    l &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+    r &lt;span class=&quot;token operator&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And the result will be the next lexicographically greater permutation. Below is the complete code:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;nextPermutation&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    
+    pivot &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; i &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            pivot &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        nums&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sort&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; nums
+    
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; j &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; pivot&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+            nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;pivot&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;j&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;
+    
+    l &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; pivot&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+    r &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nums&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; l &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; r&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        
+        nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;l&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;r&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; nums&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;l&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+        
+        l &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+        r &lt;span class=&quot;token operator&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; nums&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Setting up AWS SDK for SNS/SQS in Node.js]]></title><description><![CDATA[Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/sns-sqs-node/</guid><pubDate>Fri, 01 May 2020 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;Version 3 of the JavaScript SDK now splits up the package into smaller modules. This way, you only download what you need and reduce your file size. Packages are downloaded in the form of:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-«package-name»&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you can’t remember the name of the package, simply search to return a list of names:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; @aws-sdk/client-
@@ -272,7 +431,7 @@ alias nano=&amp;#39;nano -T4&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 /usr/local/bin/code
 
 $ &lt;span class=&quot;token function&quot;&gt;which&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;nano&lt;/span&gt;
-/usr/bin/nano&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Git Demystified]]></title><description><![CDATA[Distance from  There are several ways to refer to a previous commit from .  - refers to the first parent.  - first parent’s first parent…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</guid><pubDate>Tue, 18 Jun 2019 20:09:11 GMT</pubDate><content:encoded>&lt;h1&gt;Distance from &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;&lt;/h1&gt;
+/usr/bin/nano&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Git Demystified]]></title><description><![CDATA[Distance from  There are several ways to refer to a previous commit from .  - refers to the first parent.  - first parent’s first parent…]]></description><link>https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</link><guid isPermaLink="false">https://gatsbystarterblogsource.gatsbyjs.io/git-demystified/</guid><pubDate>Tue, 18 Jun 2019 20:09:11 GMT</pubDate><content:encoded>&lt;h2&gt;Distance from &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;There are several ways to refer to a previous commit from &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -295,7 +454,7 @@ $ &lt;span class=&quot;token function&quot;&gt;which&lt;/span&gt; &lt;span class
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;Files (Staging Area)&lt;/h1&gt;
+&lt;h2&gt;Files (Staging Area)&lt;/h2&gt;
 &lt;p&gt;Unintuitively, the &lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt; command is used for refs and files&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -309,14 +468,14 @@ $ &lt;span class=&quot;token function&quot;&gt;which&lt;/span&gt; &lt;span class
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git reset «file»&lt;/code&gt; - unstage. Think of it as the opposite to &lt;code class=&quot;language-text&quot;&gt;git add&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;git reset --hard&lt;/code&gt; - equivalent to &lt;code class=&quot;language-text&quot;&gt;git reset . ; git checkout .&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1&gt;&lt;code class=&quot;language-text&quot;&gt;checkout&lt;/code&gt; vs. &lt;code class=&quot;language-text&quot;&gt;reset&lt;/code&gt;&lt;/h1&gt;
+&lt;h2&gt;&lt;code class=&quot;language-text&quot;&gt;checkout&lt;/code&gt; vs. &lt;code class=&quot;language-text&quot;&gt;reset&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt; moves &lt;em&gt;both&lt;/em&gt; the &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt; and branch pointer. &lt;code class=&quot;language-text&quot;&gt;git checkout&lt;/code&gt; &lt;em&gt;only&lt;/em&gt; moves the &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;, detaching it.&lt;/p&gt;
 &lt;p&gt;To reattach a detached &lt;code class=&quot;language-text&quot;&gt;HEAD&lt;/code&gt;,&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; checkout «branch»   &lt;span class=&quot;token comment&quot;&gt;# e.g., git checkout master&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To undo an accidental &lt;code class=&quot;language-text&quot;&gt;git reset&lt;/code&gt;,&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;shell&quot;&gt;&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; reflog
 $ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; reset «hash»&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1&gt;Alias&lt;/h1&gt;
+&lt;h2&gt;Alias&lt;/h2&gt;
 &lt;p&gt;The config files to set aliases are found in &lt;code class=&quot;language-text&quot;&gt;~/.gitconfig&lt;/code&gt;. You can create a section in the file as follows:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;[alias]
 ac = !git add -A &amp;amp;&amp;amp; git commit -m
